@@ -4,246 +4,263 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LO Flow Solutions — Data Made Accessible</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --white:#ffffff;--off:#f8f6f2;--off2:#f0ece4;--off3:#e4ddd2;
-  --ink:#17140f;--ink2:#2c2820;--ink3:#4a4438;--muted:#7c7268;--dim:#b0a898;
-  --border:#ddd8ce;--border2:#c8c0b4;
-  --teal:#0d5c5c;--teal2:#127272;--teal3:#1a9090;
-  --teal-light:#eaf4f4;--teal-pale:#f2fafa;--teal-border:#9fd4d4;
-  --gold:#9a6e00;--gold2:#b88000;--gold3:#e8a800;
-  --gold-light:#fef7e0;--gold-border:#e0c860;--r:8px;--r-lg:14px;
+  --bg:#08090a;
+  --bg2:#0e1012;
+  --bg3:#141618;
+  --bg4:#1a1d20;
+  --line:rgba(255,255,255,0.06);
+  --line2:rgba(255,255,255,0.1);
+  --text:#e8eaec;
+  --muted:#7a828c;
+  --dim:#3a4048;
+  --accent:#f0c060;
+  --accent2:#e8a840;
+  --accent-glow:rgba(240,192,96,0.10);
+  --accent-border:rgba(240,192,96,0.25);
+  --teal:#3dcfb0;
+  --teal-glow:rgba(61,207,176,0.10);
+  --teal-border:rgba(61,207,176,0.25);
+  --blue:#5090e8;
+  --blue-glow:rgba(80,144,232,0.10);
+  --blue-border:rgba(80,144,232,0.25);
+  --r:8px;
 }
+
 html{scroll-behavior:smooth}
-body{background:var(--off);color:var(--ink);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
-.wrap{max-width:1080px;margin:0 auto;padding:0 36px;position:relative;z-index:1}
-.wrap-mid{max-width:780px;margin:0 auto;padding:0 36px;position:relative;z-index:1}
+body{background:var(--bg);color:var(--text);font-family:'Instrument Sans',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+
+/* dot grid */
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;z-index:0}
+/* top glow */
+body::after{content:'';position:fixed;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(240,192,96,0.05) 0%,transparent 70%);pointer-events:none;z-index:0}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px;position:relative;z-index:1}
+.wrap-narrow{max-width:760px;margin:0 auto;padding:0 32px;position:relative;z-index:1}
 
 /* NAV */
-nav{position:sticky;top:0;z-index:200;background:rgba(248,246,242,0.94);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-inner{max-width:1080px;margin:0 auto;padding:0 36px;height:62px;display:flex;align-items:center;justify-content:space-between}
+nav{position:sticky;top:0;z-index:200;border-bottom:1px solid var(--line);background:rgba(8,9,10,0.90);backdrop-filter:blur(20px)}
+.nav-inner{max-width:1080px;margin:0 auto;padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between}
 .logo{text-decoration:none;display:flex;flex-direction:column;line-height:1.1}
-.logo-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--ink);letter-spacing:0.01em}
-.logo-name em{font-style:italic;color:var(--teal)}
-.logo-tag{font-family:'DM Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;margin-top:1px}
-.nav-links{display:flex;align-items:center;gap:6px}
+.logo-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.12em;color:var(--text)}
+.logo-name span{color:var(--accent)}
+.logo-tag{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;margin-top:1px}
+.nav-links{display:flex;align-items:center;gap:8px}
 .nav-a{font-size:13px;color:var(--muted);text-decoration:none;padding:6px 14px;border-radius:6px;transition:color .15s,background .15s}
-.nav-a:hover{color:var(--ink);background:var(--off2)}
-.nav-cta{font-size:13px;font-weight:600;background:var(--teal);color:#fff;padding:9px 20px;border-radius:6px;text-decoration:none;transition:background .15s,transform .15s}
-.nav-cta:hover{background:var(--teal2);transform:translateY(-1px)}
+.nav-a:hover{color:var(--text);background:var(--bg3)}
+.nav-cta{font-size:13px;font-weight:600;background:var(--accent);color:#1a1000;padding:8px 18px;border-radius:6px;text-decoration:none;transition:opacity .15s,transform .15s}
+.nav-cta:hover{opacity:.88;transform:translateY(-1px)}
 
 /* HERO */
-.hero{padding:80px 0 72px;border-bottom:1px solid var(--border)}
-.hero-layout{display:grid;grid-template-columns:1fr 460px;gap:72px;align-items:center}
-.hero-kicker{display:inline-flex;align-items:center;gap:10px;font-family:'DM Mono',monospace;font-size:10px;color:var(--teal);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:24px}
-.hero-kicker::before{content:'';width:28px;height:1px;background:var(--teal)}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,5.5vw,68px);font-weight:700;line-height:1.04;letter-spacing:-0.01em;color:var(--ink);margin-bottom:22px}
-.hero h1 em{font-style:italic;color:var(--teal)}
-.hero-sub{font-size:17px;font-weight:300;color:var(--ink3);line-height:1.72;max-width:480px;margin-bottom:36px}
-.hero-sub strong{font-weight:600;color:var(--ink)}
-.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:44px}
-.btn-teal{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;background:var(--teal);color:#fff;font-weight:600;font-size:14px;border-radius:var(--r);text-decoration:none;transition:background .15s,transform .15s;border:none;cursor:pointer}
-.btn-teal:hover{background:var(--teal2);transform:translateY(-1px)}
-.btn-line{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;background:transparent;color:var(--ink3);font-size:14px;border-radius:var(--r);text-decoration:none;border:1.5px solid var(--border2);transition:border-color .15s,color .15s,background .15s}
-.btn-line:hover{border-color:var(--ink);color:var(--ink);background:var(--off2)}
+.hero{padding:96px 0 80px;border-bottom:1px solid var(--line)}
+.hero-layout{display:grid;grid-template-columns:1fr 440px;gap:72px;align-items:center}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--dim)}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,8vw,96px);line-height:0.95;letter-spacing:0.02em;color:var(--text);margin-bottom:24px}
+.hero h1 em{color:var(--accent);font-style:normal;display:block}
+.hero-sub{font-size:16px;color:var(--muted);max-width:460px;line-height:1.7;margin-bottom:36px}
+.hero-sub strong{color:var(--text);font-weight:500}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
+.btn-accent{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;background:var(--accent);color:#1a1000;font-weight:600;font-size:14px;border-radius:var(--r);text-decoration:none;transition:opacity .15s,transform .15s;border:none;cursor:pointer;letter-spacing:0.01em}
+.btn-accent:hover{opacity:.88;transform:translateY(-1px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;background:transparent;color:var(--muted);font-size:14px;border-radius:var(--r);text-decoration:none;border:1px solid var(--line2);transition:border-color .15s,color .15s}
+.btn-ghost:hover{border-color:rgba(255,255,255,.2);color:var(--text)}
 .hero-proof{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-.proof-item{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}
-.proof-dot{width:4px;height:4px;border-radius:50%;background:var(--teal);opacity:.6;flex-shrink:0}
+.proof-item{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);display:flex;align-items:center;gap:6px;letter-spacing:0.06em;text-transform:uppercase}
+.proof-dot{width:4px;height:4px;border-radius:50%;background:var(--teal);flex-shrink:0}
 
 /* DIAGRAM CARD */
-.diagram-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px;box-shadow:0 4px 24px rgba(23,20,15,0.06);position:relative;overflow:hidden}
-.diagram-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--teal3),var(--gold3))}
-.diag-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:18px}
-.diag-row{display:flex;align-items:center;gap:6px;margin-bottom:10px}
+.diagram-card{background:var(--bg2);border:1px solid var(--line2);border-radius:10px;padding:24px;position:relative;overflow:hidden}
+.diagram-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--accent))}
+.diag-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:20px}
+.diag-row{display:flex;align-items:center;gap:5px;margin-bottom:10px}
 .diag-row:last-of-type{margin-bottom:0}
-.diag-node{display:flex;align-items:center;gap:6px;padding:7px 11px;border-radius:6px;font-size:11px;font-weight:500;white-space:nowrap;flex-shrink:0}
-.node-data{background:#eaf4f4;color:var(--teal);border:1px solid var(--teal-border)}
-.node-tool{background:#fef7e0;color:var(--gold);border:1px solid var(--gold-border)}
-.node-out{background:#f0f6ff;color:#1e3a5f;border:1px solid #b8d0f0}
-.node-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.node-data .node-dot{background:var(--teal3)}
-.node-tool .node-dot{background:var(--gold3)}
-.node-out .node-dot{background:#4a80c8}
-.diag-conn{flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--border) 0,var(--border) 4px,transparent 4px,transparent 8px);min-width:10px}
-.diag-arr{font-size:11px;color:var(--dim);flex-shrink:0;font-family:'DM Mono',monospace}
-.diag-caption{margin-top:18px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);line-height:1.55;font-style:italic}
+.diag-node{display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:5px;font-size:11px;font-weight:500;white-space:nowrap;flex-shrink:0;font-family:'JetBrains Mono',monospace}
+.node-data{background:var(--teal-glow);color:var(--teal);border:1px solid var(--teal-border)}
+.node-tool{background:var(--accent-glow);color:var(--accent);border:1px solid var(--accent-border)}
+.node-out{background:var(--blue-glow);color:var(--blue);border:1px solid var(--blue-border)}
+.node-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;background:currentColor;opacity:.7}
+.diag-conn{flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--dim) 0,var(--dim) 3px,transparent 3px,transparent 7px);min-width:8px}
+.diag-arr{font-size:10px;color:var(--dim);flex-shrink:0;font-family:'JetBrains Mono',monospace}
+.diag-caption{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:11px;color:var(--dim);line-height:1.55;font-family:'JetBrains Mono',monospace}
 
 /* SECTIONS */
-section{padding:80px 0;border-bottom:1px solid var(--border)}
+section{padding:80px 0;border-bottom:1px solid var(--line)}
 section:last-of-type{border-bottom:none}
-.sec-eyebrow{font-family:'DM Mono',monospace;font-size:10px;color:var(--teal);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:12px}
-.sec-eyebrow::after{content:'';flex:1;height:1px;background:var(--border);max-width:60px}
-.sec-h{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,44px);font-weight:700;color:var(--ink);margin-bottom:10px;line-height:1.1;letter-spacing:-0.01em}
-.sec-h em{font-style:italic;color:var(--teal)}
-.sec-p{font-size:15px;color:var(--muted);max-width:520px;line-height:1.7;margin-bottom:44px}
+.sec-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4vw,52px);color:var(--text);letter-spacing:0.04em;margin-bottom:8px;line-height:1}
+.sec-title em{color:var(--accent);font-style:normal}
+.sec-sub{font-size:15px;color:var(--muted);max-width:500px;line-height:1.65;margin-bottom:44px}
+
+/* PATH STRIP */
+.path-strip{padding:28px 0;border-bottom:1px solid var(--line)}
+.path-flow{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.path-node{display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--line2);border-radius:6px;padding:7px 14px;font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.path-node.active{background:var(--teal-glow);border-color:var(--teal-border);color:var(--teal)}
+.path-dot{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.6}
+.path-sep{font-size:14px;color:var(--dim);margin:0 2px}
 
 /* LEARN GRID */
-.learn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.learn-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px 24px;transition:transform .2s,border-color .2s,box-shadow .2s;position:relative;overflow:hidden}
-.learn-card:hover{transform:translateY(-3px);border-color:var(--teal-border);box-shadow:0 8px 28px rgba(13,92,92,0.08)}
-.learn-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--teal);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.learn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.learn-card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:24px 20px;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+.learn-card:hover{border-color:var(--line2);transform:translateY(-2px)}
+.learn-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--teal);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
 .learn-card:hover::after{transform:scaleX(1)}
-.learn-num{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:700;color:var(--border);line-height:1;margin-bottom:10px}
-.learn-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:8px}
-.learn-desc{font-size:13px;color:var(--muted);line-height:1.65}
-.learn-tag{display:inline-block;margin-top:14px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:4px;background:var(--teal-light);color:var(--teal)}
+.learn-num{font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--dim);line-height:1;margin-bottom:10px}
+.learn-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:7px}
+.learn-desc{font-size:13px;color:var(--muted);line-height:1.6}
+.learn-tag{display:inline-block;margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:4px;background:var(--teal-glow);color:var(--teal);border:1px solid var(--teal-border)}
 
 /* JOURNEY */
 .journey{display:flex;flex-direction:column;gap:0;max-width:680px;margin:0 auto}
-.journey-step{display:grid;grid-template-columns:48px 1fr;gap:20px;padding:0 0 40px;position:relative}
-.journey-step::before{content:'';position:absolute;left:23px;top:48px;bottom:0;width:1px;background:var(--border)}
+.journey-step{display:grid;grid-template-columns:44px 1fr;gap:20px;padding:0 0 40px;position:relative}
+.journey-step::before{content:'';position:absolute;left:21px;top:44px;bottom:0;width:1px;background:var(--line2)}
 .journey-step:last-child::before{display:none}
 .journey-step:last-child{padding-bottom:0}
-.step-circle{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:13px;font-weight:500;flex-shrink:0;z-index:1;border:2px solid}
-.step-circle.s1{background:var(--teal-pale);border-color:var(--teal-border);color:var(--teal)}
-.step-circle.s2{background:#f0f6ff;border-color:#b8d0f0;color:#1e3a5f}
-.step-circle.s3{background:var(--gold-light);border-color:var(--gold-border);color:var(--gold)}
-.step-circle.s4{background:#f5f0fb;border-color:#c8b0e8;color:#5a3a8c}
-.step-content{padding-top:10px}
-.step-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
-.step-title{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:6px}
-.step-desc{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:10px}
+.step-circle{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;flex-shrink:0;z-index:1;border:1px solid}
+.step-circle.s1{background:var(--teal-glow);border-color:var(--teal-border);color:var(--teal)}
+.step-circle.s2{background:var(--blue-glow);border-color:var(--blue-border);color:var(--blue)}
+.step-circle.s3{background:var(--accent-glow);border-color:var(--accent-border);color:var(--accent)}
+.step-circle.s4{background:rgba(176,96,224,0.10);border-color:rgba(176,96,224,0.25);color:#c080e8}
+.step-content{padding-top:8px}
+.step-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.step-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:6px}
+.step-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:10px}
 .step-skills{display:flex;gap:6px;flex-wrap:wrap}
-.skill-chip{font-size:11px;font-weight:500;padding:4px 10px;border-radius:4px;background:var(--off2);color:var(--ink3);border:1px solid var(--border)}
+.skill-chip{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 9px;border-radius:4px;background:var(--bg3);color:var(--muted);border:1px solid var(--line2);letter-spacing:0.04em}
 
-/* COMPONENTS */
-.components{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
-.comp-card{padding:32px 28px;border-right:1px solid var(--border);background:var(--white);transition:background .2s}
-.comp-card:last-child{border-right:none}
-.comp-card:hover{background:var(--off)}
-.comp-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;padding:3px 9px;border-radius:4px;display:inline-block}
-.comp-teal .comp-eyebrow{background:var(--teal-light);color:var(--teal)}
-.comp-gold .comp-eyebrow{background:var(--gold-light);color:var(--gold)}
-.comp-slate .comp-eyebrow{background:#f0f4f8;color:#2a4a6c}
-.comp-num{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:700;color:var(--border);line-height:1;margin-bottom:10px}
-.comp-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--ink);margin-bottom:6px}
-.comp-price{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:14px}
-.comp-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:16px}
-.comp-list{list-style:none;display:flex;flex-direction:column;gap:7px}
-.comp-list li{font-size:12px;color:var(--ink3);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
-.comp-list li::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:5px}
-.comp-teal .comp-list li::before{background:var(--teal)}
-.comp-gold .comp-list li::before{background:var(--gold)}
-.comp-slate .comp-list li::before{background:#4a80c8}
-
-/* CONNECTIONS */
-.connections-layout{display:grid;grid-template-columns:1fr 400px;gap:60px;align-items:start}
-.connection-steps{display:flex;flex-direction:column;gap:4px}
-.conn-step{display:flex;align-items:flex-start;gap:16px;padding:16px 20px;background:var(--white);border:1px solid var(--border);border-radius:var(--r);transition:border-color .2s,transform .2s;cursor:default}
-.conn-step:hover{border-color:var(--teal-border);transform:translateX(4px)}
-.conn-step-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.conn-step-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px}
+/* TOOLS SECTION */
+.tools-layout{display:grid;grid-template-columns:1fr 380px;gap:56px;align-items:start}
+.conn-steps{display:flex;flex-direction:column;gap:4px}
+.conn-step{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);transition:border-color .2s,transform .2s}
+.conn-step:hover{border-color:var(--line2);transform:translateX(4px)}
+.conn-step-icon{width:32px;height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.conn-step-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
 .conn-step-desc{font-size:12px;color:var(--muted);line-height:1.55}
-.tools-cloud{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);padding:24px;box-shadow:0 2px 16px rgba(23,20,15,0.04)}
-.tools-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}
-.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.tool-chip{padding:8px 10px;border-radius:6px;font-size:11px;font-weight:500;text-align:center;border:1px solid;line-height:1.2}
-.tc-data{background:var(--teal-pale);border-color:var(--teal-border);color:var(--teal)}
-.tc-auto{background:var(--gold-light);border-color:var(--gold-border);color:var(--gold)}
-.tc-app{background:#f0f4ff;border-color:#b8c8f0;color:#2a3a7c}
-.tc-report{background:#f8f0f8;border-color:#d0b0d0;color:#6a2a7c}
-.tools-caption{margin-top:14px;font-size:11px;color:var(--dim);font-style:italic;text-align:center;padding-top:12px;border-top:1px solid var(--border)}
-.legend{margin-top:20px;display:flex;flex-direction:column;gap:8px}
+
+.tools-panel{background:var(--bg2);border:1px solid var(--line2);border-radius:var(--r);padding:22px}
+.tools-panel-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.tool-chip{padding:7px 8px;border-radius:5px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;text-align:center;border:1px solid;line-height:1.3}
+.tc-data{background:var(--teal-glow);border-color:var(--teal-border);color:var(--teal)}
+.tc-auto{background:var(--accent-glow);border-color:var(--accent-border);color:var(--accent)}
+.tc-app{background:var(--blue-glow);border-color:var(--blue-border);color:var(--blue)}
+.tc-report{background:rgba(176,96,224,0.10);border-color:rgba(176,96,224,0.25);color:#c080e8}
+.tools-caption{margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);text-align:center;padding-top:12px;border-top:1px solid var(--line);line-height:1.5}
+.legend{margin-top:16px;display:flex;flex-direction:column;gap:7px}
 .legend-item{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted)}
-.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 
 /* FOR GRID */
-.for-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.for-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:24px;display:flex;align-items:flex-start;gap:16px}
-.for-icon{width:40px;height:40px;border-radius:10px;background:var(--teal-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.for-icon svg{width:18px;height:18px;stroke:var(--teal);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.for-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px}
-.for-desc{font-size:13px;color:var(--muted);line-height:1.6}
+.for-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.for-card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;align-items:flex-start;gap:14px;transition:border-color .2s}
+.for-card:hover{border-color:var(--line2)}
+.for-icon{width:36px;height:36px;border-radius:8px;background:var(--teal-glow);border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.for-icon svg{width:16px;height:16px;stroke:var(--teal);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.for-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+.for-desc{font-size:12px;color:var(--muted);line-height:1.6}
 
-/* OUTCOMES */
-.outcomes-strip{background:var(--teal);padding:72px 0}
+/* OUTCOMES STRIP */
+.outcomes-strip{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:72px 0}
 .outcomes-inner{text-align:center}
-.oc-eyebrow{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.45);letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}
-.oc-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,46px);font-weight:700;color:#fff;margin-bottom:12px;line-height:1.1}
-.oc-title em{font-style:italic;color:var(--gold3)}
-.oc-sub{font-size:16px;color:rgba(255,255,255,.6);max-width:520px;margin:0 auto 44px;line-height:1.65}
-.outcomes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.outcome-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:var(--r);padding:20px 16px;text-align:left;transition:background .2s}
-.outcome-card:hover{background:rgba(255,255,255,.12)}
-.oc-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--gold3);line-height:1;margin-bottom:6px}
-.oc-label{font-size:13px;color:rgba(255,255,255,.85);font-weight:500;margin-bottom:4px}
-.oc-desc{font-size:11px;color:rgba(255,255,255,.45);line-height:1.5}
+.oc-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.oc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4vw,56px);color:var(--text);margin-bottom:10px;line-height:1;letter-spacing:.04em}
+.oc-title em{color:var(--accent);font-style:normal}
+.oc-sub{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 44px;line-height:1.65}
+.outcomes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.outcome-card{background:var(--bg3);border:1px solid var(--line);border-radius:var(--r);padding:20px 16px;text-align:left;transition:border-color .2s}
+.outcome-card:hover{border-color:var(--line2)}
+.oc-num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--accent);line-height:1;margin-bottom:6px}
+.oc-item-label{font-size:13px;color:var(--text);font-weight:500;margin-bottom:4px}
+.oc-desc{font-size:11px;color:var(--muted);line-height:1.55}
+
+/* COMPONENTS */
+.components{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line2);border-radius:10px;overflow:hidden}
+.comp-card{padding:32px 28px;border-right:1px solid var(--line2);background:var(--bg2);transition:background .2s}
+.comp-card:last-child{border-right:none}
+.comp-card:hover{background:var(--bg3)}
+.comp-tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;padding:3px 8px;border-radius:4px;display:inline-block;border:1px solid}
+.comp-teal .comp-tag{background:var(--teal-glow);color:var(--teal);border-color:var(--teal-border)}
+.comp-amber .comp-tag{background:var(--accent-glow);color:var(--accent);border-color:var(--accent-border)}
+.comp-num{font-family:'Bebas Neue',sans-serif;font-size:44px;color:var(--dim);line-height:1;margin-bottom:10px}
+.comp-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.04em;color:var(--text);margin-bottom:4px}
+.comp-price{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:14px}
+.comp-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:16px}
+.comp-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.comp-list li{font-size:12px;color:var(--muted);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.comp-list li::before{content:'→';color:var(--dim);font-size:10px;flex-shrink:0;margin-top:2px;font-family:'JetBrains Mono',monospace}
+.comp-teal .comp-list li::before{color:var(--teal)}
+.comp-amber .comp-list li::before{color:var(--accent)}
 
 /* PRICING */
-.pricing-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.price-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:transform .2s,box-shadow .2s}
-.price-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(23,20,15,.08)}
+.pricing-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.price-card{background:var(--bg2);border:1px solid var(--line);border-radius:10px;overflow:hidden;transition:border-color .2s,transform .2s}
+.price-card:hover{border-color:var(--line2);transform:translateY(-2px)}
 .price-card.featured{border-color:var(--teal-border)}
-.price-head{padding:28px 24px 20px}
-.price-tier{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
-.price-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:10px}
-.price-amount{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:700;color:var(--ink);line-height:1}
-.price-amount sup{font-size:22px;vertical-align:super;font-weight:600}
-.price-per{font-size:13px;color:var(--muted);margin-top:4px}
+.price-featured-bar{background:var(--teal);color:var(--bg);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:6px;font-weight:500}
+.price-head{padding:24px 22px 18px}
+.price-tier-tag{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.price-name{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.04em;color:var(--text);margin-bottom:10px}
+.price-amount{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--text);line-height:1}
+.price-amount sup{font-size:24px;vertical-align:super}
+.price-amount .price-plus{font-size:28px;color:var(--muted)}
+.price-per{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:4px}
 .price-desc{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.6}
-.price-body{padding:0 24px 24px;border-top:1px solid var(--border)}
-.price-list{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:9px}
-.price-list li{font-size:13px;color:var(--ink3);display:flex;align-items:flex-start;gap:9px;line-height:1.5}
-.price-list li::before{content:'→';color:var(--teal);font-size:11px;flex-shrink:0;margin-top:2px}
-.price-cta{display:block;margin-top:20px;padding:11px;text-align:center;background:var(--ink);color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;transition:background .15s}
-.price-cta:hover{background:var(--ink2)}
-.price-card.featured .price-cta{background:var(--teal)}
-.price-card.featured .price-cta:hover{background:var(--teal2)}
-.featured-label{background:var(--teal);color:#fff;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:7px;font-weight:500}
+.price-body{padding:0 22px 22px;border-top:1px solid var(--line)}
+.price-list{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:8px}
+.price-list li{font-size:12px;color:var(--muted);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.price-list li::before{content:'→';font-family:'JetBrains Mono',monospace;color:var(--dim);font-size:10px;flex-shrink:0;margin-top:2px}
+.price-card.featured .price-list li::before{color:var(--teal)}
+.price-cta{display:block;margin-top:18px;padding:11px;text-align:center;background:var(--bg3);color:var(--text);border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;transition:background .15s;border:1px solid var(--line2)}
+.price-cta:hover{background:var(--bg4)}
+.price-card.featured .price-cta{background:var(--teal);color:var(--bg);border-color:var(--teal)}
+.price-card.featured .price-cta:hover{opacity:.88}
 
 /* FAQ */
 .faq{display:flex;flex-direction:column;gap:2px}
-.faq-item{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
-details[open].faq-item{border-color:var(--teal-border)}
-.faq-q{width:100%;text-align:left;padding:18px 22px;background:none;border:none;color:var(--ink);font-size:15px;font-weight:500;font-family:'Outfit',sans-serif;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px}
-.faq-q:hover{background:var(--off)}
-.chevron{width:16px;height:16px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;transition:transform .2s}
-details[open] .chevron{transform:rotate(180deg)}
-.faq-a{padding:0 22px 18px;font-size:14px;color:var(--muted);line-height:1.7;border-top:1px solid var(--border)}
+.faq-item{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+details[open].faq-item{border-color:var(--line2)}
+.faq-q{width:100%;text-align:left;padding:16px 20px;background:none;border:none;color:var(--text);font-size:14px;font-weight:500;font-family:'Instrument Sans',sans-serif;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq-q:hover{background:var(--bg3)}
+.faq-chevron{width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;transition:transform .2s}
+details[open] .faq-chevron{transform:rotate(180deg)}
+.faq-a{padding:0 20px 16px;font-size:13px;color:var(--muted);line-height:1.7;border-top:1px solid var(--line)}
 
 /* FINAL CTA */
-.final-cta{padding:96px 0;background:var(--ink)}
-.final-inner{text-align:center}
-.final-ey{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px}
-.final-h{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5.5vw,64px);font-weight:700;color:#fff;margin-bottom:16px;line-height:1.05}
-.final-h em{font-style:italic;color:var(--gold3)}
-.final-p{font-size:16px;color:rgba(255,255,255,.5);max-width:440px;margin:0 auto 40px;line-height:1.65}
-.final-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.btn-gold{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;background:var(--gold3);color:var(--ink);font-weight:700;font-size:15px;border-radius:var(--r);text-decoration:none;transition:opacity .15s,transform .15s;border:none;cursor:pointer}
-.btn-gold:hover{opacity:.88;transform:translateY(-1px)}
-.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;background:transparent;color:rgba(255,255,255,.55);font-size:15px;border-radius:var(--r);text-decoration:none;border:1.5px solid rgba(255,255,255,.15);transition:border-color .15s,color .15s}
-.btn-ghost:hover{border-color:rgba(255,255,255,.35);color:#fff}
-.final-note{font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,.22);margin-top:22px}
+.final-cta{padding:100px 0;text-align:center;border-top:1px solid var(--line)}
+.final-cta h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,6.5vw,80px);letter-spacing:.04em;color:var(--text);margin-bottom:16px;line-height:1}
+.final-cta h2 span{color:var(--accent)}
+.final-cta p{font-size:16px;color:var(--muted);max-width:420px;margin:0 auto 36px;line-height:1.65}
+.final-note{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);margin-top:18px;letter-spacing:0.04em}
 
 /* FOOTER */
-footer{background:var(--ink2);padding:32px 0}
+footer{border-top:1px solid var(--line);padding:32px 0}
 .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
-.f-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:rgba(255,255,255,.7)}
-.f-name em{font-style:italic;color:var(--teal3)}
-.f-tag{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
-.f-note{font-size:12px;color:rgba(255,255,255,.24)}
+.footer-logo-name{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.1em;color:var(--muted)}
+.footer-logo-name span{color:var(--accent)}
+.footer-logo-tag{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--dim);letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
+.footer-note{font-size:12px;color:var(--dim);font-family:'JetBrains Mono',monospace}
 
 /* ANIMATIONS */
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.hero>*{opacity:0;animation:fadeUp .5s ease forwards}
-.hero-kicker{animation-delay:.05s}
-.hero-layout{animation-delay:.15s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.hero>*{opacity:0;animation:fadeUp .55s ease forwards}
+.hero-eyebrow{animation-delay:.08s}
+.hero-layout{animation-delay:.18s}
 
 /* RESPONSIVE */
 @media(max-width:860px){
-  .hero-layout,.connections-layout{grid-template-columns:1fr}
+  .hero-layout,.tools-layout{grid-template-columns:1fr}
   .learn-grid{grid-template-columns:1fr 1fr}
   .components{grid-template-columns:1fr}
-  .comp-card{border-right:none;border-bottom:1px solid var(--border)}
+  .comp-card{border-right:none;border-bottom:1px solid var(--line2)}
   .comp-card:last-child{border-bottom:none}
   .for-grid,.pricing-grid{grid-template-columns:1fr}
   .outcomes-grid{grid-template-columns:repeat(2,1fr)}
-  .wrap,.wrap-mid{padding:0 20px}
+  .wrap,.wrap-narrow{padding:0 20px}
   .nav-inner{padding:0 20px}
-  .hero{padding:56px 0 52px}
 }
 @media(max-width:560px){
   .learn-grid{grid-template-columns:1fr}
@@ -253,17 +270,18 @@ footer{background:var(--ink2);padding:32px 0}
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <div class="nav-inner">
     <a href="#" class="logo">
-      <span class="logo-name">LO <em>Flow</em> Solutions</span>
+      <span class="logo-name">LO <span>Flow</span> Solutions</span>
       <span class="logo-tag">Data Made Accessible</span>
     </a>
     <div class="nav-links">
-      <a href="#learn" class="nav-a">What You Learn</a>
-      <a href="#connect" class="nav-a">Tools</a>
+      <a href="#learn" class="nav-a">Curriculum</a>
+      <a href="#tools" class="nav-a">Tools</a>
       <a href="#pricing" class="nav-a">Pricing</a>
-      <a href="#start" class="nav-cta">Start Learning</a>
+      <a href="#start" class="nav-cta">Start Learning →</a>
     </div>
   </div>
 </nav>
@@ -271,7 +289,7 @@ footer{background:var(--ink2);padding:32px 0}
 <!-- HERO -->
 <div class="hero">
   <div class="wrap">
-    <p class="hero-kicker">Learning platform for non-technical professionals</p>
+    <p class="hero-eyebrow">Learning platform for non-technical professionals</p>
     <div class="hero-layout">
       <div>
         <h1>Learn to connect<br><em>data</em> and<br>technology.</h1>
@@ -279,8 +297,8 @@ footer{background:var(--ink2);padding:32px 0}
           You don't need to be a developer. You need to understand <strong>how data moves</strong>, how systems talk to each other, and how to make technology work for your business — without writing code.
         </p>
         <div class="hero-ctas">
-          <a href="#start" class="btn-teal">Start your learning journey</a>
-          <a href="#learn" class="btn-line">See the curriculum</a>
+          <a href="#start" class="btn-accent">Start your learning journey →</a>
+          <a href="#learn" class="btn-ghost">See the curriculum</a>
         </div>
         <div class="hero-proof">
           <span class="proof-item"><span class="proof-dot"></span>No coding required</span>
@@ -325,12 +343,29 @@ footer{background:var(--ink2);padding:32px 0}
   </div>
 </div>
 
+<!-- PATH STRIP -->
+<div class="path-strip">
+  <div class="wrap">
+    <div class="path-flow">
+      <div class="path-node"><span class="path-dot"></span>Data sources</div>
+      <span class="path-sep">→</span>
+      <div class="path-node"><span class="path-dot"></span>Connections</div>
+      <span class="path-sep">→</span>
+      <div class="path-node"><span class="path-dot"></span>Automation</div>
+      <span class="path-sep">→</span>
+      <div class="path-node active"><span class="path-dot"></span>Dashboards</div>
+      <span class="path-sep">→</span>
+      <div class="path-node active"><span class="path-dot"></span>Data fluency</div>
+    </div>
+  </div>
+</div>
+
 <!-- WHAT YOU LEARN -->
 <section id="learn">
   <div class="wrap">
-    <p class="sec-eyebrow">Curriculum</p>
-    <h2 class="sec-h">What you'll actually <em>learn</em></h2>
-    <p class="sec-p">Six skill areas that give non-technical professionals genuine fluency with data and the tools that connect it.</p>
+    <p class="sec-label">Curriculum</p>
+    <h2 class="sec-title">What you'll actually <em>learn</em></h2>
+    <p class="sec-sub">Six skill areas that give non-technical professionals genuine fluency with data and the tools that connect it.</p>
     <div class="learn-grid">
       <div class="learn-card">
         <div class="learn-num">01</div>
@@ -373,11 +408,11 @@ footer{background:var(--ink2);padding:32px 0}
 </section>
 
 <!-- LEARNING JOURNEY -->
-<section style="background:var(--off2)">
-  <div class="wrap-mid">
-    <p class="sec-eyebrow">Your path</p>
-    <h2 class="sec-h">From <em>confused</em> to confident</h2>
-    <p class="sec-p">A structured learning journey that meets you where you are and builds real comprehension at every step.</p>
+<section style="background:var(--bg2)">
+  <div class="wrap-narrow">
+    <p class="sec-label">Your path</p>
+    <h2 class="sec-title">From <em>confused</em> to confident</h2>
+    <p class="sec-sub">A structured learning journey that meets you where you are and builds real comprehension at every step.</p>
     <div class="journey">
       <div class="journey-step">
         <div class="step-circle s1">01</div>
@@ -437,17 +472,17 @@ footer{background:var(--ink2);padding:32px 0}
   </div>
 </section>
 
-<!-- HOW DATA CONNECTS -->
-<section id="connect">
+<!-- TOOLS -->
+<section id="tools">
   <div class="wrap">
-    <p class="sec-eyebrow">The tools</p>
-    <h2 class="sec-h">The tools you'll <em>learn</em> to connect</h2>
-    <p class="sec-p">You don't need to master all of them. You need to understand how they fit together — and when to use which.</p>
-    <div class="connections-layout">
-      <div class="connection-steps">
+    <p class="sec-label">The tools</p>
+    <h2 class="sec-title">The tools you'll <em>learn</em> to connect</h2>
+    <p class="sec-sub">You don't need to master all of them. You need to understand how they fit together — and when to use which.</p>
+    <div class="tools-layout">
+      <div class="conn-steps">
         <div class="conn-step">
-          <div class="conn-step-icon" style="background:var(--teal-light)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <div class="conn-step-icon" style="background:var(--teal-glow);border:1px solid var(--teal-border)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
           </div>
           <div>
             <div class="conn-step-title">Data sources — where information lives</div>
@@ -455,8 +490,8 @@ footer{background:var(--ink2);padding:32px 0}
           </div>
         </div>
         <div class="conn-step">
-          <div class="conn-step-icon" style="background:var(--gold-light)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+          <div class="conn-step-icon" style="background:var(--accent-glow);border:1px solid var(--accent-border)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
           </div>
           <div>
             <div class="conn-step-title">Automation platforms — how data moves</div>
@@ -464,8 +499,8 @@ footer{background:var(--ink2);padding:32px 0}
           </div>
         </div>
         <div class="conn-step">
-          <div class="conn-step-icon" style="background:#f0f4ff">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2a4a9c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <div class="conn-step-icon" style="background:var(--blue-glow);border:1px solid var(--blue-border)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
           </div>
           <div>
             <div class="conn-step-title">Dashboards — where data surfaces</div>
@@ -473,8 +508,8 @@ footer{background:var(--ink2);padding:32px 0}
           </div>
         </div>
         <div class="conn-step">
-          <div class="conn-step-icon" style="background:#f5f0fb">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5a3a8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          <div class="conn-step-icon" style="background:rgba(176,96,224,0.10);border:1px solid rgba(176,96,224,0.25)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c080e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
           </div>
           <div>
             <div class="conn-step-title">Internal tools — where teams interact with data</div>
@@ -484,41 +519,41 @@ footer{background:var(--ink2);padding:32px 0}
       </div>
 
       <div>
-        <div class="tools-cloud">
-          <p class="tools-label">Tools covered in the curriculum</p>
+        <div class="tools-panel">
+          <p class="tools-panel-label">Tools covered in the curriculum</p>
           <div class="tools-grid">
             <div class="tool-chip tc-data">Airtable</div>
-            <div class="tool-chip tc-data">Google Sheets</div>
+            <div class="tool-chip tc-data">Sheets</div>
             <div class="tool-chip tc-data">Notion</div>
             <div class="tool-chip tc-auto">Make.com</div>
             <div class="tool-chip tc-auto">Zapier</div>
-            <div class="tool-chip tc-auto">Monday.com</div>
-            <div class="tool-chip tc-report">Looker Studio</div>
+            <div class="tool-chip tc-auto">Monday</div>
+            <div class="tool-chip tc-report">Looker</div>
             <div class="tool-chip tc-report">Metabase</div>
             <div class="tool-chip tc-report">Data Studio</div>
             <div class="tool-chip tc-app">Retool</div>
             <div class="tool-chip tc-app">Glide</div>
             <div class="tool-chip tc-app">Softr</div>
           </div>
-          <p class="tools-caption">You learn the concept behind each category — so you can adapt to any tool in the ecosystem.</p>
+          <p class="tools-caption">Learn the concept behind each category — adapt to any tool in the ecosystem.</p>
         </div>
         <div class="legend">
-          <div class="legend-item"><span class="legend-dot" style="background:var(--teal3)"></span>Data sources &amp; storage</div>
-          <div class="legend-item"><span class="legend-dot" style="background:var(--gold3)"></span>Automation &amp; connection platforms</div>
-          <div class="legend-item"><span class="legend-dot" style="background:#9060c0"></span>Internal app &amp; interface builders</div>
-          <div class="legend-item"><span class="legend-dot" style="background:#7090d0"></span>Reporting &amp; dashboard tools</div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--teal)"></span>Data sources &amp; storage</div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--accent)"></span>Automation &amp; connection platforms</div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--blue)"></span>Reporting &amp; dashboard tools</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#c080e8"></span>Internal app &amp; interface builders</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WHO THIS IS FOR -->
-<section style="background:var(--off2)">
+<!-- WHO IT'S FOR -->
+<section style="background:var(--bg2)">
   <div class="wrap">
-    <p class="sec-eyebrow">Who it's for</p>
-    <h2 class="sec-h">Built for non-technical <em>professionals</em></h2>
-    <p class="sec-p">If you work with data every day but feel like technology is always one step ahead of you — this is for you.</p>
+    <p class="sec-label">Who it's for</p>
+    <h2 class="sec-title">Built for non-technical <em>professionals</em></h2>
+    <p class="sec-sub">If you work with data every day but feel like technology is always one step ahead of you — this is for you.</p>
     <div class="for-grid">
       <div class="for-card">
         <div class="for-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
@@ -556,28 +591,28 @@ footer{background:var(--ink2);padding:32px 0}
 <div class="outcomes-strip">
   <div class="wrap">
     <div class="outcomes-inner">
-      <p class="oc-eyebrow">What changes</p>
+      <p class="oc-label">What changes</p>
       <h2 class="oc-title">After LO Flow, you'll <em>understand</em> your data</h2>
       <p class="oc-sub">Not just use it. Understand it. Know where it comes from, where it goes, and how to make it work harder for you.</p>
       <div class="outcomes-grid">
         <div class="outcome-card">
           <div class="oc-num">01</div>
-          <div class="oc-label">Data literacy</div>
+          <div class="oc-item-label">Data literacy</div>
           <div class="oc-desc">Read, interpret, and structure data across tools — not just consume reports made by others.</div>
         </div>
         <div class="outcome-card">
           <div class="oc-num">02</div>
-          <div class="oc-label">Tool fluency</div>
+          <div class="oc-item-label">Tool fluency</div>
           <div class="oc-desc">Know how and when to use automation platforms, databases, and dashboards — and how to connect them.</div>
         </div>
         <div class="outcome-card">
           <div class="oc-num">03</div>
-          <div class="oc-label">Technical confidence</div>
-          <div class="oc-desc">Speak the language of integrations and APIs with enough fluency to collaborate effectively with developers.</div>
+          <div class="oc-item-label">Technical confidence</div>
+          <div class="oc-desc">Speak the language of integrations and APIs with enough fluency to collaborate with developers.</div>
         </div>
         <div class="outcome-card">
           <div class="oc-num">04</div>
-          <div class="oc-label">Real connections</div>
+          <div class="oc-item-label">Real connections</div>
           <div class="oc-desc">Leave each learning unit with a working connection, dashboard, or automation — not just theory.</div>
         </div>
       </div>
@@ -585,15 +620,15 @@ footer{background:var(--ink2);padding:32px 0}
   </div>
 </div>
 
-<!-- TWO COMPONENTS -->
+<!-- HOW WE DELIVER -->
 <section>
   <div class="wrap">
-    <p class="sec-eyebrow">How we deliver it</p>
-    <h2 class="sec-h">Two ways to <em>learn</em> with us</h2>
-    <p class="sec-p">A growing library of training material — and a way to request exactly what's missing for you.</p>
+    <p class="sec-label">How we deliver it</p>
+    <h2 class="sec-title">Two ways to <em>learn</em> with us</h2>
+    <p class="sec-sub">A growing library of training material — and a way to request exactly what's missing for you.</p>
     <div class="components">
       <div class="comp-card comp-teal">
-        <span class="comp-eyebrow">Foundation</span>
+        <span class="comp-tag">Foundation</span>
         <div class="comp-num">01</div>
         <div class="comp-title">Base Subscription</div>
         <div class="comp-price">From $49 / month</div>
@@ -607,8 +642,8 @@ footer{background:var(--ink2);padding:32px 0}
           <li>Can't find what you need? Request it</li>
         </ul>
       </div>
-      <div class="comp-card comp-gold">
-        <span class="comp-eyebrow">On Request</span>
+      <div class="comp-card comp-amber">
+        <span class="comp-tag">On Request</span>
         <div class="comp-num">02</div>
         <div class="comp-title">Custom How-To Requests</div>
         <div class="comp-price">From $39 · varies by request</div>
@@ -627,16 +662,16 @@ footer{background:var(--ink2);padding:32px 0}
 </section>
 
 <!-- PRICING -->
-<section id="pricing" style="background:var(--off2)">
+<section id="pricing" style="background:var(--bg2)">
   <div class="wrap">
-    <p class="sec-eyebrow">Pricing</p>
-    <h2 class="sec-h">Simple, honest pricing</h2>
-    <p class="sec-p">Subscribe to access the full training library. If you don't see what you need, request a tailored how-to — priced transparently based on what's involved.</p>
+    <p class="sec-label">Pricing</p>
+    <h2 class="sec-title">Simple, honest pricing</h2>
+    <p class="sec-sub">Subscribe to access the full training library. If you don't see what you need, request a tailored how-to — priced transparently based on what's involved.</p>
     <div class="pricing-grid">
       <div class="price-card featured">
-        <div class="featured-label">Start Here</div>
+        <div class="price-featured-bar">Start Here</div>
         <div class="price-head">
-          <p class="price-tier">Monthly · Recurring</p>
+          <p class="price-tier-tag">Monthly · Recurring</p>
           <div class="price-name">Base Subscription</div>
           <div class="price-amount"><sup>$</sup>49</div>
           <p class="price-per">per month · cancel anytime</p>
@@ -655,11 +690,11 @@ footer{background:var(--ink2);padding:32px 0}
       </div>
       <div class="price-card">
         <div class="price-head">
-          <p class="price-tier">On Request · Per How-To</p>
+          <p class="price-tier-tag">On Request · Per How-To</p>
           <div class="price-name">Custom How-To Requests</div>
-          <div class="price-amount"><sup>$</sup>39<span style="font-size:22px;color:var(--muted)">+</span></div>
+          <div class="price-amount"><sup>$</sup>39<span class="price-plus">+</span></div>
           <p class="price-per">from $39 · varies by request</p>
-          <p class="price-desc">Don't see the training material you need? Submit a request — we'll scope it, quote a fee, and deliver a tailored how-to built around your tools and workflow.</p>
+          <p class="price-desc">Don't see the training you need? Submit a request — we'll scope it, quote a fee, and deliver a tailored how-to built around your tools and workflow.</p>
         </div>
         <div class="price-body">
           <ul class="price-list">
@@ -679,44 +714,44 @@ footer{background:var(--ink2);padding:32px 0}
 
 <!-- FAQ -->
 <section>
-  <div class="wrap-mid">
-    <p class="sec-eyebrow">Questions</p>
-    <h2 class="sec-h">Common questions</h2>
-    <p class="sec-p" style="margin-bottom:32px">Everything you need to know before getting started.</p>
+  <div class="wrap-narrow">
+    <p class="sec-label">Common questions</p>
+    <h2 class="sec-title">FAQ</h2>
+    <p class="sec-sub" style="margin-bottom:32px">Everything you need to know before getting started.</p>
     <div class="faq">
       <details class="faq-item">
         <summary class="faq-q">Do I need any technical background?
-          <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </summary>
         <div class="faq-a">None at all. The platform is designed for people who work with data every day but don't think of themselves as technical. If you've used a spreadsheet, you have enough background to start. We begin with the concepts before any tools.</div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">Will I actually learn to connect tools — or just read about them?
-          <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </summary>
         <div class="faq-a">Both — in the right order. We start by building understanding (the mental model for how data flows), then move into practical, hands-on configuration with real tools. Every learning unit ends with something you've actually done, not just read about.</div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">What if I can't find the training I need in the library?
-          <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </summary>
         <div class="faq-a">Submit a custom how-to request. Tell us the specific tool, workflow, or data question you need help with — we'll scope it, quote a fee upfront, and deliver a tailored how-to guide or walkthrough built around your exact situation. Completed how-to's are added to the library for all subscribers.</div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">How are custom how-to requests priced?
-          <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </summary>
         <div class="faq-a">Fees are based on the complexity of what's involved — a simple "how do I connect X to Y" starts from $39, while a multi-step walkthrough covering several tools might be $149 or more. You'll always receive a clear quote before any work begins, so there are no surprises.</div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">Is this about building software, or learning about data?
-          <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </summary>
         <div class="faq-a">Learning about data and the connections between systems — not building software. The focus is on literacy, fluency, and practical skill with the tools that bridge data and technology. You'll be able to configure, connect, and interpret — not code or develop from scratch.</div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">What tools will I need?
-          <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </summary>
         <div class="faq-a">Most tools in the curriculum have free tiers that are sufficient for learning — Google Sheets, Make.com, Airtable, and Looker Studio all have free plans. We'll guide you on when (if ever) a paid plan makes sense for your situation.</div>
       </details>
@@ -727,27 +762,22 @@ footer{background:var(--ink2);padding:32px 0}
 <!-- FINAL CTA -->
 <div class="final-cta" id="start">
   <div class="wrap">
-    <div class="final-inner">
-      <p class="final-ey">LO Flow Solutions — Data Made Accessible</p>
-      <h2 class="final-h">Data shouldn't be a<br><em>mystery</em> to you.</h2>
-      <p class="final-p">Learn to read, connect, and understand data across your business — without needing a developer to explain it every time.</p>
-      <div class="final-btns">
-        <a href="#pricing" class="btn-gold">Start learning — from $49/mo</a>
-        <a href="#learn" class="btn-ghost">See the curriculum</a>
-      </div>
-      <p class="final-note">No coding required · Cancel your subscription anytime · Custom how-to requests available to all subscribers</p>
-    </div>
+    <h2>Data shouldn't be a<br><span>mystery</span> to you.</h2>
+    <p>Learn to read, connect, and understand data across your business — without needing a developer to explain it every time.</p>
+    <a href="#pricing" class="btn-accent" style="font-size:15px;padding:15px 32px">Start learning — from $49/mo →</a>
+    <div class="final-note">No coding required · Cancel anytime · Custom how-to requests from $39</div>
   </div>
 </div>
 
+<!-- FOOTER -->
 <footer>
   <div class="wrap">
     <div class="footer-inner">
       <div>
-        <div class="f-name">LO <em>Flow</em> Solutions</div>
-        <div class="f-tag">Data Made Accessible</div>
+        <div class="footer-logo-name">LO <span>Flow</span> Solutions</div>
+        <div class="footer-logo-tag">Data Made Accessible</div>
       </div>
-      <div class="f-note">Learning platform for non-technical professionals · Base Subscription · Custom How-To Requests</div>
+      <div class="footer-note">Learning platform for non-technical professionals · Base Subscription · Custom How-To Requests</div>
     </div>
   </div>
 </footer>
